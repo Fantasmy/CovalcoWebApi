@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2035
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CovalcoWebApi", "CovalcoWebApi\CovalcoWebApi.csproj", "{914144C5-409F-471D-A9BD-4DFF10EDA0E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CovalcoWebApi.Tests", "CovalcoWebApi.Tests\CovalcoWebApi.Tests.csproj", "{84FCD721-F0D1-4641-A639-6196C2744873}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{914144C5-409F-471D-A9BD-4DFF10EDA0E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{914144C5-409F-471D-A9BD-4DFF10EDA0E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{914144C5-409F-471D-A9BD-4DFF10EDA0E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{914144C5-409F-471D-A9BD-4DFF10EDA0E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84FCD721-F0D1-4641-A639-6196C2744873}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84FCD721-F0D1-4641-A639-6196C2744873}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84FCD721-F0D1-4641-A639-6196C2744873}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84FCD721-F0D1-4641-A639-6196C2744873}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A42A9447-BD60-408F-B786-6558650AFC23}
+	EndGlobalSection
+EndGlobal
