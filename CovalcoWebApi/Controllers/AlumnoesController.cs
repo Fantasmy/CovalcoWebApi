@@ -10,34 +10,36 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using CovalcoWebApi.Models;
 
+// código que tiene que ir en repository, son consulatas linq
+
 namespace CovalcoWebApi.Controllers
 {
     public class AlumnoesController : ApiController
     {
-        private CovalcoEntities db = new CovalcoEntities();
+        private CovalcoEntities db = new CovalcoEntities();   // aqui cogemos la conexión
 
         // GET: api/Alumnoes
         public IQueryable<Alumno> GetAlumno()
         {
-            return db.Alumno;
+            return db.Alumno;   // select
         }
 
         // GET: api/Alumnoes/5
         [ResponseType(typeof(Alumno))]
         public IHttpActionResult GetAlumno(int id)
         {
-            Alumno alumno = db.Alumno.Find(id);
+            Alumno alumno = db.Alumno.Find(id);  // recuperara alumno por id
             if (alumno == null)
             {
-                return NotFound();
+                return NotFound(); // trabajamos con un enum que es results, y ahi hay un valor NotFound que se devuelve por http.
             }
 
-            return Ok(alumno);
+            return Ok(alumno);  // aqui se puede devovler el 200(ok) + alumno encontrado (entidad a devolver)
         }
 
         // PUT: api/Alumnoes/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutAlumno(int id, Alumno alumno)
+        public IHttpActionResult PutAlumno(int id, Alumno alumno)   // en put se envia alumno y id, en post solo el objeto
         {
             if (!ModelState.IsValid)
             {
@@ -46,16 +48,16 @@ namespace CovalcoWebApi.Controllers
 
             if (id != alumno.Id)
             {
-                return BadRequest();
+                return BadRequest();  //validaciones http
             }
 
-            db.Entry(alumno).State = EntityState.Modified;
+            db.Entry(alumno).State = EntityState.Modified;  // se tiene q marcar el objeto como sucio, que se ha modificado
 
             try
             {
-                db.SaveChanges();
+                db.SaveChanges();  
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException)  // se tiene que hacer catch
             {
                 if (!AlumnoExists(id))
                 {
@@ -67,7 +69,7 @@ namespace CovalcoWebApi.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return StatusCode(HttpStatusCode.NoContent); // NoContent devuelve VOID = todo ha ido bien
         }
 
         // POST: api/Alumnoes
@@ -79,23 +81,23 @@ namespace CovalcoWebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Alumno.Add(alumno);
-            db.SaveChanges();
+            db.Alumno.Add(alumno);  // agrega alumno dentro de la persistencia, aqu el alumno no tiene id
+            db.SaveChanges(); // aqui se guarda, después del savechanges alumno tiene id
 
-            return CreatedAtRoute("DefaultApi", new { id = alumno.Id }, alumno);
+            return CreatedAtRoute("DefaultApi", new { id = alumno.Id }, alumno);  // CreatedAtRoute -> redirecciona as defaultAPi, enviando nuevo id del alumno y el objeto alumno creado
         }
 
         // DELETE: api/Alumnoes/5
         [ResponseType(typeof(Alumno))]
         public IHttpActionResult DeleteAlumno(int id)
         {
-            Alumno alumno = db.Alumno.Find(id);
+            Alumno alumno = db.Alumno.Find(id);  // Primero hace un select para buscar el objeto en el contectp
             if (alumno == null)
             {
                 return NotFound();
             }
 
-            db.Alumno.Remove(alumno);
+            db.Alumno.Remove(alumno);  // se hace remove
             db.SaveChanges();
 
             return Ok(alumno);
@@ -107,12 +109,12 @@ namespace CovalcoWebApi.Controllers
             {
                 db.Dispose();
             }
-            base.Dispose(disposing);
+            base.Dispose(disposing); // dispose de la conexion de la base de datos, como un clsoe
         }
 
-        private bool AlumnoExists(int id)
+        private bool AlumnoExists(int id)   // alumno exists con una lambda expression
         {
-            return db.Alumno.Count(e => e.Id == id) > 0;
+            return db.Alumno.Count(e => e.Id == id) > 0;  // cuantame todos los alumnos cuyo id es el que te pongo, si el valor es > 0 te devuelve un true.
         }
     }
 }

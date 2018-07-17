@@ -25,6 +25,6 @@ namespace CovalcoWebApi.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Alumno> Alumno { get; set; }
+        public virtual DbSet<Alumno> Alumno { get; set; }  // todas las propiedades del alumno, porque lo ha decidido entity framework, pero se podría cambiar. Se podría trabajar con una plantilla propia tt
     }
 }
