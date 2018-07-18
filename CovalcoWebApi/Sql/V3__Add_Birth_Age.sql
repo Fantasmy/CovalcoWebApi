@@ -1,0 +1,1 @@
+﻿ALTER TABLE [dbo].[Alumno] ADD Age INT NULL, BirthDay DateTime null ;
