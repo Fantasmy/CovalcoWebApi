@@ -14,30 +14,54 @@ using CovalcoWebApi.Models;
 
 namespace CovalcoWebApi.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="System.Web.Http.ApiController" />
     public class AlumnoesController : ApiController
     {
+        /// <summary>
+        /// The database
+        /// </summary>
         private CovalcoEntities db = new CovalcoEntities();   // aqui cogemos la conexión
 
         // GET: api/Alumnoes
+        /// <summary>
+        /// Gets the alumno object.
+        /// </summary>
+        /// <returns>A set of Alumno objects as a queryable object</returns>
         public IQueryable<Alumno> GetAlumno()
         {
             return db.Alumno;   // select
         }
 
         // GET: api/Alumnoes/5
+        /// <summary>
+        /// Gets the alumno.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        /// <exception cref="HttpResponseException"></exception>
         [ResponseType(typeof(Alumno))]
         public IHttpActionResult GetAlumno(int id)
         {
             Alumno alumno = db.Alumno.Find(id);  // recuperara alumno por id
             if (alumno == null)
             {
-                return NotFound(); // trabajamos con un enum que es results, y ahi hay un valor NotFound que se devuelve por http.
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+                /*return NotFound(); */// trabajamos con un enum que es results, y ahi hay un valor NotFound que se devuelve por http.
             }
 
             return Ok(alumno);  // aqui se puede devovler el 200(ok) + alumno encontrado (entidad a devolver)
         }
 
         // PUT: api/Alumnoes/5
+        /// <summary>
+        /// Puts the alumno.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="alumno">The alumno.</param>
+        /// <returns></returns>
         [ResponseType(typeof(void))]
         public IHttpActionResult PutAlumno(int id, Alumno alumno)   // en put se envia alumno y id, en post solo el objeto
         {
@@ -73,6 +97,11 @@ namespace CovalcoWebApi.Controllers
         }
 
         // POST: api/Alumnoes
+        /// <summary>
+        /// Posts the alumno.
+        /// </summary>
+        /// <param name="alumno">The alumno.</param>
+        /// <returns></returns>
         [ResponseType(typeof(Alumno))]
         public IHttpActionResult PostAlumno(Alumno alumno)
         {
@@ -88,6 +117,11 @@ namespace CovalcoWebApi.Controllers
         }
 
         // DELETE: api/Alumnoes/5
+        /// <summary>
+        /// Deletes the alumno.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         [ResponseType(typeof(Alumno))]
         public IHttpActionResult DeleteAlumno(int id)
         {
@@ -103,6 +137,10 @@ namespace CovalcoWebApi.Controllers
             return Ok(alumno);
         }
 
+        /// <summary>
+        /// Libera los recursos no administrados que utiliza el objeto y, opcionalmente, libera los recursos administrados.
+        /// </summary>
+        /// <param name="disposing">true para liberar tanto los recursos administrados como los no administrados; false para liberar únicamente los recursos no administrados.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -112,6 +150,11 @@ namespace CovalcoWebApi.Controllers
             base.Dispose(disposing); // dispose de la conexion de la base de datos, como un clsoe
         }
 
+        /// <summary>
+        /// Alumnoes the exists.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         private bool AlumnoExists(int id)   // alumno exists con una lambda expression
         {
             return db.Alumno.Count(e => e.Id == id) > 0;  // cuantame todos los alumnos cuyo id es el que te pongo, si el valor es > 0 te devuelve un true.

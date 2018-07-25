@@ -40,8 +40,7 @@ namespace CovalcoWebApi.Controllers.Tests
         {
             AlumnoesController controller = new AlumnoesController();
             IHttpActionResult actionResult = controller.PutAlumno(1,
-                new
-                Alumno
+                new Alumno
                 { Id = 1, Nombre = "Ferran", Apellidos = "Lopez", Dni = "23456784J" });
 
             Assert.IsNotNull(actionResult);
@@ -57,11 +56,10 @@ namespace CovalcoWebApi.Controllers.Tests
                     {
                         Nombre = "Ferran",
                         Apellidos = "Lopez",
-                        Dni = "12345266Y"
+                        Dni = "23456784J"
                     });
 
-            var contentResult =
-                actionResult as
+            var contentResult = actionResult as
                 CreatedAtRouteNegotiatedContentResult<Alumno>;
 
             Assert.IsNotNull(actionResult);
